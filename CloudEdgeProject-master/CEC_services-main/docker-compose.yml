@@ -1,0 +1,46 @@
+services:
+    auth-service:
+        build: ./authentication
+        # image: vatsalbhuva11/auth-service:latest
+        container_name: auth-service
+        ports:
+            - "3000:3000"
+        env_file:
+            - ./authentication/.env
+        # volumes:
+        #     # mounting the local directory for live code changes
+        #     # no rebuilding required.
+        #     - ./authentication:/usr/src/app/authentication
+        depends_on:
+            - db-service
+
+    db-service:
+        image: mongo
+        container_name: db-service
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo-data:/data/db
+
+    cache-service:
+        image: redis
+        container_name: cache-service
+        ports:
+            - "6379:6379"
+
+    product-service:
+        build: ./product
+        # image: vatsalbhuva11/product-service:latest
+        container_name: product-service
+        ports:
+            - "3001:3001"
+        env_file:
+            - ./product/.env
+        # volumes:
+        #     - ./product:/usr/src/app/product
+        depends_on:
+            - cache-service
+            - db-service
+
+volumes:
+    mongo-data:
