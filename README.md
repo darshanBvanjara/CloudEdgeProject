@@ -38,7 +38,8 @@ ecommerce-backend/
 
 ## Architecture Diagram
 
-![Architecture Diagram](./architecture-diagram.png)
+![architecture-diagram](https://github.com/user-attachments/assets/c3b96fdd-069e-46b0-a957-9603025d3dfe)
+
 
 ---
 
